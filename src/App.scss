@@ -1,0 +1,36 @@
+@import './libs/reset'; // Removes default styling
+@import './libs/breakpoints'; // Library for easy media queries
+
+// Fonts import
+@import url(https://fonts.googleapis.com/css?family=Baloo+Bhaina+2|Manrope|Roboto+Condensed|Lato:300i&display=swap);
+
+// Font Definitions
+$baloo: 'Baloo Bhaina 2', sans-serif;
+$manrope: 'Manrope', sans-serif;
+$robcon: 'Roboto Condensed', sans-serif;
+$lato: 'Lato', sans-serif;
+
+// Palette Definition
+$y: #ffd24c;
+$lb: #eaf6f3;
+$b: #2a8ca1;
+$r: #e16666;
+$rhov: #e47b7b;
+$rhov--outlined-bg: rgba(228, 123, 123, 0.15);
+$ract: #d65d5d;
+$ract--outlined-bg: rgba(228, 123, 123, 0.225);
+$p: #4c4f6a;
+$w: whitesmoke;
+
+@import './libs/gen'; // General styling such as inputs, etc.
+
+// 
+#root { 
+   height: 100vh;
+   overflow: hidden;
+   visibility: hidden;
+   opacity: 0;
+};
+
+// Component Stylesheets
+@import './Components/LandingPage/LandingPage';

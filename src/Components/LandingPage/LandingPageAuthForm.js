@@ -1,0 +1,115 @@
+import React, { useReducer } from 'react';
+import {
+   reducer,
+   initialFormState,
+   validateFormState,
+   createErrorAction,
+   getPasswordFillColor,
+   createFormDataAction
+} from './localware';
+import axios from 'axios';
+
+export default function ({ type }) {
+   const [formState, dispatch] = useReducer(reducer, initialFormState)
+
+   function onSubmitForm(e) {
+      e.preventDefault();
+
+      const validationResult = validateFormState(formState);
+      if (validationResult || formState.password.length < 7) return dispatch(createErrorAction(validationResult));
+
+      switch (type) {
+         case 'login':
+            break;
+         case 'register':
+            axios
+               .post('/api/users', {
+                  name: formState.username,
+                  email: formState.email,
+                  password: formState.password,
+               })
+               .then(response => console.log(response))
+               .catch(error => console.error(error));
+            break;
+         default:
+            return;
+      };
+   };
+
+   function onChangeForm(e) {
+      dispatch(createFormDataAction({ [e.target.id]: e.target.value }));
+   };
+
+   return (
+      <form onSubmit={onSubmitForm} className="LandingPageAuthForm">
+         {
+            type === 'login'
+               ? <h1 className="LandingPageAuthForm__title">
+                  Login and <span>hang</span>
+               </h1>
+               : <h1 className="LandingPageAuthForm__title">
+                  Register and <span>chill</span>
+               </h1>
+         }
+         {
+            type === 'register' &&
+            <div className="LandingPageAuthForm__input">
+               <input
+                  type="text"
+                  id="username"
+                  autoComplete='off'
+                  placeholder='placeholder'
+                  onChange={onChangeForm} />
+               <label htmlFor="username">USERNAME</label>
+               {
+                  formState.error.username &&
+                  <span className="LandingPageAuthForm__error-message">
+                     {formState.error.username}
+                  </span>
+               }
+            </div>
+         }
+         <div className="LandingPageAuthForm__input">
+            <input
+               type="text"
+               id="email"
+               autoComplete='off'
+               placeholder='placeholder'
+               onChange={onChangeForm} />
+            <label htmlFor="email">E-MAIL</label>
+            {
+               formState.error.email &&
+               <span className="LandingPageAuthForm__error-message">
+                  {formState.error.email}
+               </span>
+            }
+         </div>
+         <div className="LandingPageAuthForm__input">
+            <input
+               type="password"
+               id="password"
+               min={7}
+               autoComplete='off'
+               placeholder='placeholder'
+               onChange={onChangeForm} />
+            <label htmlFor="password">PASSWORD</label>
+            {
+               type === 'register' &&
+               <div className="LandingPageAuthForm__password">
+                  <div
+                     style={{
+                        width: `${(formState.passwordStrength[0] * .2) * 276}px`,
+                        backgroundColor: getPasswordFillColor(formState.passwordStrength[0]),
+                     }}
+                     className="LandingPageAuthForm__password--meter">
+                  </div>
+                  <span className="LandingPageAuthForm__password--status">
+                     {formState.passwordStrength[1]}
+                  </span>
+               </div>
+            }
+         </div>
+         <button style={type === 'login' ? { marginTop: '22px' } : null} type='submit' className="button button--filled">SUBMIT</button>
+      </form>
+   );
+};

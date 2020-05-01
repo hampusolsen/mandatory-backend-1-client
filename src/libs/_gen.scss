@@ -1,0 +1,33 @@
+.button {
+   font-family: $robcon;
+   border-radius: 4px;
+   font-weight: bold;
+   padding: 8px 16px;
+   letter-spacing: 2px;
+   height: 36px;
+   min-width: 58px;
+   transition: 115ms;
+   &--filled {
+      background-color: $r;
+      color: $w;
+      &:hover { background-color: $rhov; }
+      &:active { background-color: $ract; }
+   }
+   &--outlined {
+      color: $r;
+      border: 2px solid $r;
+      &:hover {
+         color: $rhov;
+         border-color: $rhov;
+         background-color: $rhov--outlined-bg;
+      }
+      &:active {
+         color: $ract;
+         border-color: $ract;
+         background-color: $ract--outlined-bg;
+      }
+   }
+   &--text {
+      color: $r;
+   }
+}

@@ -1,16 +1,21 @@
 import React, { useEffect } from 'react';
-import { getData } from './api/api';
 import './App.scss';
-import { } from './api/socket';
+import { Route } from 'react-router-dom';
 
-function App() {
+import LandingPage from './Components/LandingPage/LandingPage';
+import ChatApp from './Components/ChatApp/ChatApp';
+
+import preventFlash from './libs/flash';
+
+export default function App() {
   useEffect(() => {
-    getData()
+    preventFlash();
   }, []);
 
   return (
-    <div className="App"></div>
+    <React.Fragment>
+      <Route exact path='/' component={LandingPage} />
+      <Route exact path='/' component={ChatApp} />
+    </React.Fragment>
   );
-}
-
-export default App;
+};
