@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import animate from '../../animation/landing-page-background';
+import drawBackground from '../../animation/landing-page-background';
 import { useDebounce } from '../../libs/hooks';
 
 export default function () {
@@ -10,7 +10,7 @@ export default function () {
    useEffect(() => {
       canvas.current.width = debouncedDimensions.w;
       canvas.current.height = debouncedDimensions.h;
-      animate(canvas.current);
+      drawBackground(canvas.current);
 
       function set() {
          setDimensions({ w: window.innerWidth, h: window.innerHeight });

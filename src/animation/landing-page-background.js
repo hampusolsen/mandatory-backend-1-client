@@ -48,7 +48,7 @@ class Triangle {
    }
 }
 
-export default function (canvas) {
+export default function drawBackground(canvas) {
    const ctx = canvas.getContext('2d');
    const tris = [];
    const spacing = {

@@ -1,0 +1,34 @@
+.CreateRoomForm {
+   position: absolute;
+   z-index: 2;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   background-color: $w;
+   box-shadow: 0 1px 2px rgba($color: $p, $alpha: 0.5);
+   border-radius: 15px;
+   border: 1px solid lightgrey;
+   padding: 22px;
+   &__title {
+      color: $b;
+      font-size: 2.35rem;
+      font-family: $baloo;
+      margin-bottom: 22px;
+   }
+   &__modal {
+      background-color: rgba($color: #000000, $alpha: 0.6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+   }
+   .button:first-of-type { margin-right: 12px; }
+   .input-text {
+      @include input-text();
+      margin-bottom: 18px;
+   }
+}

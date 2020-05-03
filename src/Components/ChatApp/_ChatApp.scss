@@ -1,0 +1,75 @@
+.ChatApp {
+   height: 100%;
+   width: 100%;
+   display: grid;
+   grid-template:
+      'header header' 52px
+      'menu content' 1fr
+      / 280px 1fr;
+}
+
+.ChatAppHeader {
+   grid-area: header;
+   background-color: $dp;
+   padding-left: 32px;
+   align-items: center;
+   display: flex;
+   &__logo {
+      width: 32px;
+      fill: $w;
+      margin-right: 12px;
+   }
+   &__title {
+      color: $w;
+      font-family: $baloo;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      font-size: 22px;
+   }
+}
+
+.ChatAppMenu {
+   grid-area: menu;
+   background-color: $p;
+}
+
+.ChatAppRoom {
+   grid-area: content;
+   &__splash {
+      position: relative;
+      img { pointer-events: none; }
+      span {
+         pointer-events: none;
+         background-color: rgba($color: #000000, $alpha: 0.6);
+         color: $w;
+         font-family: $baloo;
+         padding: 4px 12px;
+         position: absolute;
+         top: 55%;
+         left: 33%;
+         transform: rotate(-5deg);
+         &::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border: 12px solid transparent;
+            border-bottom-color: rgba($color: #000000, $alpha: 0.6);
+            position: absolute;
+            top: -24px;
+            left: 24px;
+         }
+      }
+   }
+   &--missing {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      canvas {
+         z-index: -1;
+         position: absolute;
+         top: -150;
+         left: -150;
+      }
+   }
+}

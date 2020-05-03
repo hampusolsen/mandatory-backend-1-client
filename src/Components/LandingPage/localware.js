@@ -1,15 +1,76 @@
+/**
+ * action types
+ */
+
 const FORM_INPUT = 'FORM_INPUT';
 const ERROR = 'ERROR';
+const SET_REDIRECT_PATH = 'SET_REDIRECT_PATH';
 
-export const createErrorAction = (errors) => ({
+/**
+ * action creators
+ */
+
+export const setError = (errors) => ({
    type: ERROR,
    payload: errors,
 });
 
-export const createFormDataAction = (keyValuePair) => ({
+export const setFormData = (keyValuePair) => ({
    type: FORM_INPUT,
    payload: keyValuePair,
 });
+
+export const setRedirectPath = (path) => ({
+   type: SET_REDIRECT_PATH,
+   payload: path,
+});
+
+/**
+ * initial state declaration
+ */
+
+export const initialFormState = {
+   email: '',
+   password: '',
+   username: '',
+   error: {
+      email: false,
+      username: false,
+   },
+   passwordStrength: [0, 'Invalid'],
+   redirectPath: null,
+};
+
+/**
+ * local reducer function
+ */
+
+export function reducer(state, action) {
+   switch (action.type) {
+      case FORM_INPUT:
+         let passwordStrength = state.passwordStrength;
+         if (action.payload.password) passwordStrength = evaluatePasswordStrength(action.payload.password);
+
+         return {
+            ...state,
+            ...action.payload,
+            passwordStrength,
+         };
+
+      case SET_REDIRECT_PATH:
+         return { ...state, redirectPath: action.payload };
+
+      case ERROR:
+         return { ...state, error: action.payload };
+
+      default:
+         return state;
+   };
+};
+
+/**
+ * utility functions
+ */
 
 export function getPasswordFillColor(strength) {
    switch (strength) {
@@ -45,6 +106,7 @@ function validateEmail(email) {
 function validateUsername(username) {
    const noSymbols = /.(?!.*[_\-\\!"#¤%&/()=?`´,.*'^¨~|><§])/.test(username);
 
+   if (!username) return false;
    if (username.length < 7) return 'Minimum of 7 characters.';
    if (username.length >= 7 && username.length <= 21 && noSymbols) return false;
    if (username.length > 21) return 'Maximum of 21 characters.';
@@ -63,34 +125,3 @@ export function validateFormState({ email, username }) {
    };
 };
 
-export const initialFormState = {
-   email: '',
-   password: '',
-   username: '',
-   error: {
-      email: false,
-      username: false,
-   },
-   passwordStrength: [0, 'Invalid'],
-   submitted: false,
-};
-
-export function reducer(state, action) {
-   switch (action.type) {
-      case FORM_INPUT:
-         let passwordStrength = state.passwordStrength;
-         if (action.payload.password) passwordStrength = evaluatePasswordStrength(action.payload.password);
-
-         return {
-            ...state,
-            ...action.payload,
-            passwordStrength,
-         };
-
-      case ERROR:
-         return { ...state, error: action.payload };
-
-      default:
-         return state;
-   };
-};

@@ -20,11 +20,11 @@ $rhov--outlined-bg: rgba(228, 123, 123, 0.15);
 $ract: #d65d5d;
 $ract--outlined-bg: rgba(228, 123, 123, 0.225);
 $p: #4c4f6a;
+$dp: #35374d;
 $w: whitesmoke;
 
-@import './libs/gen'; // General styling such as inputs, etc.
+@import './libs/gen'; // General styling such as inputs, buttons, etc...
 
-// 
 #root { 
    height: 100vh;
    overflow: hidden;
@@ -34,3 +34,5 @@ $w: whitesmoke;
 
 // Component Stylesheets
 @import './Components/LandingPage/LandingPage';
+@import './Components/ChatApp/ChatApp';
+@import './Components/CreateRoomForm/CreateRoomForm';

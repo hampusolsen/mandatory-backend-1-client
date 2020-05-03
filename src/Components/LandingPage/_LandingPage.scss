@@ -50,7 +50,10 @@
             background-color: #8388aa;
             & ~ label { color: $w; }
          }
-         &:focus ~ label { transform: translateY(-28px); }
+         &:focus ~ label { 
+            transform: translateY(-28px);
+            font-size: 9px;
+         }
       }
       label {
          z-index: 1;
