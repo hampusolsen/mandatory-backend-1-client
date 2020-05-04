@@ -23,14 +23,11 @@
       color: $w;
       font-family: $baloo;
       text-decoration: underline;
+      text-decoration-thickness: 2px;
       text-underline-offset: 4px;
       font-size: 22px;
+      &:visited { color: $w; }
    }
-}
-
-.ChatAppMenu {
-   grid-area: menu;
-   background-color: $p;
 }
 
 .ChatAppRoom {

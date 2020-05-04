@@ -15,7 +15,7 @@ export default function App() {
   return (
     <React.Fragment>
       <Route exact path='/' component={LandingPage} />
-      <Route path='/rooms/:roomId' component={ChatApp} />
+      <Route path='/app/' component={ChatApp} />
     </React.Fragment>
   );
 };

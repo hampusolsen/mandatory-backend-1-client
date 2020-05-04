@@ -30,28 +30,29 @@
    &--text {
       color: $r;
       &:hover { background-color: $rhov--outlined-bg; }
+      &:active { background-color: $ract--outlined-bg; }
    }
 }
 
 @mixin input-text(
-   $hovercolor: $p,
-   $color: $p,
-   $activecolor: $lb, 
-   $bgcolor: $b, 
-   $bordercolor: $b) {
+   $hoverColor: $p,
+   $textColor: $p,
+   $activeColor: $lb, 
+   $bgColor: $b, 
+   $borderColor: $b) {
    position: relative;
    height: 56px;
    width: 244px;
    input {
       width: 100%;
       height: 36px;
-      border: 1px solid $bordercolor;
+      border: 1px solid $borderColor;
       border-radius: 4px;
       outline: none;
       box-sizing: border-box;
       padding-left: 8px;
       transition: 100ms;
-      &:hover { background-color: rgba($color: $hovercolor, $alpha: 0.2); }
+      &:hover { background-color: rgba($color: $hoverColor, $alpha: 0.2); }
       &:active { background-color: white; }
       &::placeholder { color: transparent; }
       &:placeholder-shown ~ label {
@@ -71,7 +72,7 @@
       letter-spacing: 1px;
       font-size: 10px;
       text-transform: uppercase;
-      color: $color;
+      color: $textColor;
       pointer-events: none;
       font-weight: bold;
       transition: .2s;
@@ -90,7 +91,54 @@
       right: 4px;
       font-family: $baloo;
       font-size: 10px;
-      color: rgba($color: $color, $alpha: 0.5);
+      color: rgba($color: $textColor, $alpha: 0.5);
       pointer-events: none;
+   }
+}
+
+@mixin icon-plus($bgColor: black) {
+   width: 18px;
+   height: 2px;
+   background-color: $bgColor;
+   position: relative;
+   border-radius: 1px;
+   &::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      height: 18px;
+      width: 2px;
+      background-color: $bgColor;
+      border-radius: 1px;
+   }
+}
+
+@mixin icon-profile($bgColor: black) {
+   width: 22px;
+   height: 22px;
+   overflow: hidden;
+   position: relative;
+   &::after {
+      content: '';
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: -2px;
+      background-color: $bgColor;
+   }
+   &::before {
+      content: '';
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      position: absolute;
+      top: 0px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: $bgColor;
    }
 }

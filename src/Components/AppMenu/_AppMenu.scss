@@ -1,0 +1,65 @@
+.AppMenu {
+   grid-area: menu;
+   background-color: $p;
+   &__divisor {
+      height: 2px;
+      width: 100%;
+      background-color: #5f6280;
+   }
+   &__add-sign {
+      @include icon-plus($w);
+   }
+   &__create-room-button {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 42px;
+      padding: 0 28px;
+      width: 100%;
+      color: $w;
+      font-family: $manrope;
+      font-size: 14px;
+      &:hover { background-color: #40435d; }
+   }
+   &__room-list {
+      display: flex;
+      flex-direction: column;
+   }
+   &__room-link {
+      font-family: $manrope;
+      font-size: 14px;
+      display: flex;
+      height: 42px;
+      align-items: center;
+      padding: 0 28px;
+      color: $w;
+      &:visited { color: $w; }
+      &:hover { background-color: #40435d; }
+   }
+}
+
+.AppMenuProfile {
+   display: flex;
+   justify-content: space-between;
+   padding: 18px 28px;
+   &:hover { background-color: #40435d; }
+   &__info {
+      display: flex;
+      flex-direction: column;
+      color: $w;
+      font-family: $manrope;
+      font-size: 14px;
+   }
+   &__room { font-weight: bold; }
+   &__pic {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #5f6280;
+   }
+   &__defaultPic { @include icon-profile($w); }
+}
+
