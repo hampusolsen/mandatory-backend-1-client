@@ -10,9 +10,14 @@ export async function registerNewUser(userCredentials) {
    return response.data;
 };
 
-export async function retrieveRoomData(roomId) {
-   const response = await axios.get(`/api/rooms/${roomId}`);
-   return response.data;
+export async function retrieveRoomData(roomId, password) {
+   if (!password) {
+      const response = await axios.get(`/api/rooms/${roomId}`);
+      return response.data;
+   } else {
+      const response = await axios.post(`/api/rooms/${roomId}`, { password });
+      return response.data;
+   };
 };
 
 export async function registerNewRoom(roomCredentials) {

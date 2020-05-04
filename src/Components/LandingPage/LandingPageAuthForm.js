@@ -35,7 +35,10 @@ export default function ({ type }) {
             loginUser(userCredentials)
                .then(({ refreshToken, user }) => {
                   Dispatch(setCurrentProfile({ refreshToken, user }));
-                  dispatch(setRedirectPath(`/app/rooms/${user.rooms[0] ? user.rooms[0].id : 'no-subscriptions'}`));
+                  dispatch(setRedirectPath({
+                     pathname: `/app/rooms/${user.rooms[0] ? user.rooms[0].id : 'no-subscriptions'}`,
+                     private: user.rooms[0] ? user.rooms[0].private : false,
+                  }));
                })
                .catch(error => {
                   console.error(error);
@@ -52,7 +55,7 @@ export default function ({ type }) {
             registerNewUser(userCredentials)
                .then(({ refreshToken, user }) => {
                   Dispatch(setCurrentProfile({ refreshToken, user }));
-                  dispatch(setRedirectPath(`/app/rooms/${user.rooms[0].id || 'no-subscriptions'}`));
+                  dispatch(setRedirectPath('/app/rooms/no-subscriptions'));
                })
                .catch(error => {
                   console.error(error);

@@ -35,6 +35,15 @@
       color: $w;
       &:visited { color: $w; }
       &:hover { background-color: #40435d; }
+      &--private {
+         @include icon-lock($w);
+      }
+      &--public {
+         &::before {
+            content: '#';
+            margin-right: 5px;
+         }
+      }
    }
 }
 

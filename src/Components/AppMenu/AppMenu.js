@@ -28,7 +28,13 @@ export default function AppMenu() {
             <div className="AppMenu__room-list">
                {
                   rooms.map(room => (
-                     <Link className='AppMenu__room-link' key={room.id} to={`/app/rooms/${room.id}`}>
+                     <Link
+                        className='AppMenu__room-link'
+                        key={room.id}
+                        to={{ pathname: `/app/rooms/${room.id}`, private: room.private }}>
+                        {room.private
+                           ? <div className="AppMenu__room-link--private" />
+                           : <div className="AppMenu__room-link--public" />}
                         {room.title}
                      </Link>
                   ))

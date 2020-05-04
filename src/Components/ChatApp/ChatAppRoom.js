@@ -1,29 +1,45 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
-
+import { useLocation } from 'react-router-dom';
 import { setCurrentRoom } from '../../state/actions';
 import { retrieveRoomData } from '../../api/api';
+import RoomPassword from '../Room/RoomPassword';
 
 export default function ChatAppRoom() {
    const Dispatch = useDispatch();
-   const { roomId } = useParams();
-   const [room, setRoom] = useState();
+   const location = useLocation();
+   const [room, setRoom] = useState({});
+   const [showInput, setShowInput] = useState(false);
 
-   useEffect(() => {
-      retrieveRoomData(roomId)
+   const get = useCallback((password) => {
+      const roomId = location.pathname.split('/').slice(-1)[0];
+
+      retrieveRoomData(roomId, password)
          .then(room => {
             setRoom(room);
             Dispatch(setCurrentRoom({ title: room.title, id: room.id }));
+            setShowInput(false);
          })
          .catch(error => {
-            console.error(error);
+            if (error.message.includes('403')) {
+               setShowInput(true);
+            };
          });
-   }, [roomId, Dispatch]);
+   }, [Dispatch, location.pathname]);
+
+   useEffect(() => {
+      if (location.private) setShowInput(true);
+      else get();
+   }, [location, get]);
+
+   console.log(room);
 
    return (
-      <main>
+      <React.Fragment>
+         {showInput && <RoomPassword onSubmit={(password) => get(password)} />}
+         <main className='ChatAppRoom'>
 
-      </main>
+         </main>
+      </React.Fragment>
    );
 };
